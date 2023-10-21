@@ -1,0 +1,17 @@
+{
+    "name": "muhamaddafa/php",
+    "description": "warung-susea",
+    "autoload": {
+        "psr-4": {
+            "Muhamaddafa\\Php\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "muhamaddafa",
+            "email": "gaming102dafa@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}

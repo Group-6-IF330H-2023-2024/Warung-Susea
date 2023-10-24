@@ -63,4 +63,5 @@ Setelah itu jalankan perintah berikut di terminal
  - [Dribbble](https://dribbble.com/) - UI/UX
  - [Stack Overflow](https://stackoverflow.com/) - ANY PROBLEM ISSUE
  - [Chat GPT](https://chat.openai.com/) - ANY PROBLEM ISSUE
+ - [Sushi Tei Menu](https://www.sushitei.co.id/menu) - MENU
 

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import axios from "axios";
-
+import { motion } from "framer-motion";
 const EditMenu = () => {
 	const { id } = useParams();
 	const [menuData, setMenuData] = useState({});
@@ -90,7 +90,11 @@ const EditMenu = () => {
 
 	return (
 		<>
-			<div className="flex flex-col justify-center flex-1 min-h-full px-6 py-12 lg:px-8">
+			<motion.div
+				initial={{ scale: 0.2, opacity: 0 }}
+				animate={{ scale: 1, opacity: 1 }}
+				transition={{ duration: 1.05, type: "spring" }}
+				className="flex flex-col justify-center flex-1 min-h-full px-6 py-12 lg:px-8">
 				<div className="w-full max-w-sm mx-auto">
 					<h2 className="text-2xl font-bold leading-9 tracking-tight text-center text-green-900">
 						Edit Data Menu
@@ -100,7 +104,8 @@ const EditMenu = () => {
 					<form
 						encType="multipart/form-data"
 						method="post"
-						onSubmit={handleSubmit}>
+						onSubmit={handleSubmit}
+						className="space-y-3">
 						<div>
 							<label
 								htmlFor="nama-menu"
@@ -236,15 +241,18 @@ const EditMenu = () => {
 									Batal
 								</button>
 							</Link>
-							<button
+							<motion.button
+								initial={{ scale: 1 }}
+								whileHover={{ scale: 1.06 }}
+								whileTap={{ scale: 0.8 }}
 								type="submit"
 								className="px-3 py-2 text-sm font-semibold text-white bg-green-700 rounded-md shadow-sm hover:bg-green-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
 								Simpan
-							</button>
+							</motion.button>
 						</div>
 					</form>
 				</div>
-			</div>
+			</motion.div>
 		</>
 	);
 };

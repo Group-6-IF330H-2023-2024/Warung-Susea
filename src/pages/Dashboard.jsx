@@ -7,6 +7,7 @@ import {
 import { Link } from "react-router-dom";
 import CardListDashboard from "../components/CardListDashboard";
 import Navbar from "../components/Navbar";
+import { motion } from "framer-motion";
 
 const Dashboard = () => {
 	const [menu, setMenu] = useState();
@@ -33,19 +34,27 @@ const Dashboard = () => {
 		<>
 			<Navbar isLogin={true} />
 			<div className="mx-8 mt-8 md:mx-auto md:container">
-				<h1 className="text-6xl">Admin Dashboard</h1>
+				<h1 className="mb-3 text-6xl text-green-700">Admin Dashboard</h1>
 				<div className="flex gap-2">
 					<Link to={"/tambah_menu"}>
-						<button className="flex items-center h-12 gap-2 px-3 py-2 mt-4 mb-4 text-white bg-green-700 rounded-lg w-max">
+						<motion.button
+							initial={{ scale: 1 }}
+							whileHover={{ scale: 1.06 }}
+							whileTap={{ scale: 0.8 }}
+							className="flex items-center h-12 gap-2 px-3 py-2 mt-4 mb-4 text-white bg-green-700 rounded-lg w-max">
 							<PlusCircleIcon className="w-6" />
 							<h1>Tambah Menu</h1>
-						</button>
+						</motion.button>
 					</Link>
 					<Link to={"/list"}>
-						<button className="flex items-center h-12 gap-2 px-3 py-2 mt-4 mb-4 text-green-700 border-2 border-green-700 rounded-lg w-max">
+						<motion.button
+							initial={{ scale: 1 }}
+							whileHover={{ scale: 1.06 }}
+							whileTap={{ scale: 0.8 }}
+							className="flex items-center h-12 gap-2 px-3 py-2 mt-4 mb-4 text-green-700 border-2 border-green-700 rounded-lg w-max">
 							<ArrowUturnLeftIcon className="w-6" />
 							<h1>Kembali Ke Halaman Menu</h1>
-						</button>
+						</motion.button>
 					</Link>
 				</div>
 				<div className="relative overflow-x-auto shadow-md sm:rounded-lg">
@@ -71,7 +80,7 @@ const Dashboard = () => {
 						</thead>
 						<tbody>
 							{menu?.map((item, index) => (
-								<CardListDashboard key={index} item={item} />
+								<CardListDashboard key={index} item={item} index={index} />
 							))}
 						</tbody>
 					</table>

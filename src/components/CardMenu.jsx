@@ -1,7 +1,14 @@
 import { useState } from "react";
 import MenuModal from "./MenuModal";
+import { motion } from "framer-motion";
 
-const CardMenu = ({ menuData, tambahKeCart, hapusDariCart, isLogin }) => {
+const CardMenu = ({
+	menuData,
+	tambahKeCart,
+	hapusDariCart,
+	isLogin,
+	index,
+}) => {
 	const [jumlahOrder, setJumlahOrder] = useState(0);
 
 	const handleTambahJumlah = () => {
@@ -39,7 +46,11 @@ const CardMenu = ({ menuData, tambahKeCart, hapusDariCart, isLogin }) => {
 	};
 
 	return (
-		<div className="relative flex flex-col w-full gap-6 p-8 rounded-lg shadow-xl card-menu-wrap bg-slate-50 md:w-max">
+		<motion.div
+			initial={{ translateY: 100, opacity: 0 }}
+			animate={{ translateY: 0, opacity: 1 }}
+			transition={{ delay: index * 0.1, duration: 1.6, type: "spring" }}
+			className="relative flex flex-col w-full gap-6 p-8 rounded-lg shadow-xl card-menu-wrap bg-slate-50 md:w-max">
 			<div className="flex justify-center kategori">
 				<div className="px-4 py-1 border rounded-full w-max">
 					{menuData?.kategori}
@@ -69,7 +80,10 @@ const CardMenu = ({ menuData, tambahKeCart, hapusDariCart, isLogin }) => {
 				</p>
 				<div className="mt-4 button">
 					{jumlahOrder === 0 ? (
-						<button
+						<motion.button
+							initial={{ scale: 1 }}
+							whileHover={{ scale: 1.06 }}
+							whileTap={{ scale: 0.8 }}
 							onClick={() => {
 								if (isLogin) {
 									handleAddToCart();
@@ -81,36 +95,42 @@ const CardMenu = ({ menuData, tambahKeCart, hapusDariCart, isLogin }) => {
 							}}
 							className="w-full px-4 py-4 font-medium text-white bg-green-900 rounded-md text-md">
 							Tambah ke Pesanan
-						</button>
+						</motion.button>
 					) : (
 						<div className="flex items-center justify-center">
 							<div className="flex items-center shadow-md">
-								<button
+								<motion.button
+									initial={{ scale: 1 }}
+									whileHover={{ scale: 1.06 }}
+									whileTap={{ scale: 0.8 }}
 									onClick={() => {
 										handleRemoveFromCart();
 										handleKurangJumlah();
 									}}
 									className="px-4 py-4 font-medium text-white bg-green-900 rounded-l-md text-md">
 									-
-								</button>
+								</motion.button>
 								<h1 className="px-4 py-4 font-medium text-white bg-green-700 text-md">
 									{jumlahOrder}
 								</h1>
-								<button
+								<motion.button
+									initial={{ scale: 1 }}
+									whileHover={{ scale: 1.06 }}
+									whileTap={{ scale: 0.8 }}
 									onClick={() => {
 										handleAddToCart();
 										handleTambahJumlah();
 									}}
 									className="px-4 py-4 font-medium text-white bg-green-900 rounded-r-md text-md">
 									+
-								</button>
+								</motion.button>
 							</div>
 						</div>
 					)}
 					<MenuModal menuData={menuData} />
 				</div>
 			</div>
-		</div>
+		</motion.div>
 	);
 };
 

@@ -8,6 +8,7 @@ import {
 import axios from "axios";
 import Logo from "../assets/img/logo.png";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 
 const Navbar = ({ isLogin, setIsLogin }) => {
 	const navigation = [
@@ -74,7 +75,11 @@ const Navbar = ({ isLogin, setIsLogin }) => {
 									</div>
 								</div>
 								<div className="flex items-center justify-end gap-5 sm:w-full col-2">
-									<div className="login-button">
+									<motion.div
+										className="login-button"
+										initial={{ scale: 1 }}
+										whileHover={{ scale: 1.06 }}
+										whileTap={{ scale: 0.8 }}>
 										{isLogin ? (
 											<button
 												onClick={handleLogout}
@@ -90,7 +95,7 @@ const Navbar = ({ isLogin, setIsLogin }) => {
 												</button>
 											</Link>
 										)}
-									</div>
+									</motion.div>
 								</div>
 							</div>
 						</div>

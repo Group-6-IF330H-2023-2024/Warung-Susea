@@ -1,8 +1,9 @@
 import { TrashIcon, PencilSquareIcon } from "@heroicons/react/24/outline";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 
-const CardListDashboard = ({ item }) => {
+const CardListDashboard = ({ item, index }) => {
 	const handleSubmitDelete = async () => {
 		if (confirm("Apakah Kamu Yakin Menghapus Menu?"))
 			await axios
@@ -28,7 +29,11 @@ const CardListDashboard = ({ item }) => {
 	};
 
 	return (
-		<tr className="h-full text-center bg-white border-b">
+		<motion.tr
+			initial={{ opacity: 0, border: 0, translateX: -100 }}
+			animate={{ opacity: 1, border: 1, translateX: 0 }}
+			transition={{ delay: index * 0.15, duration: 1, type: "spring" }}
+			className="h-full text-center bg-white border-b">
 			<td className="flex items-center gap-4 px-6 py-4 font-medium text-gray-900">
 				<div className="flex items-center w-24 h-24 image">
 					<img
@@ -49,17 +54,26 @@ const CardListDashboard = ({ item }) => {
 			<td className="px-6 py-4">{formatToRupiah(item?.harga)}</td>
 			<td className="px-6 py-4">
 				<Link to={`/edit_menu/${item?.id}`}>
-					<button className="p-2">
+					<motion.button
+						className="p-2"
+						initial={{ scale: 1 }}
+						whileHover={{ scale: 1.4 }}
+						whileTap={{ scale: 0.8 }}>
 						<PencilSquareIcon className="w-6" />
-					</button>
+					</motion.button>
 				</Link>
 			</td>
 			<td className="px-6 py-4">
-				<button className="p-2" onClick={handleSubmitDelete}>
+				<motion.button
+					className="p-2"
+					initial={{ scale: 1 }}
+					whileHover={{ scale: 1.4 }}
+					whileTap={{ scale: 0.8 }}
+					onClick={handleSubmitDelete}>
 					<TrashIcon className="w-6" />
-				</button>
+				</motion.button>
 			</td>
-		</tr>
+		</motion.tr>
 	);
 };
 

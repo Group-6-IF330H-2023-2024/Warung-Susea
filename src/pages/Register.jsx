@@ -1,6 +1,7 @@
 import axios from "axios";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Logo from "../assets/img/logo2.png";
+import { motion } from "framer-motion";
 
 const Register = () => {
 	const [state, setState] = useState({
@@ -14,6 +15,16 @@ const Register = () => {
 			tanggal_lahir: "",
 		},
 	});
+
+	useEffect(() => {
+		axios
+			.get(`${import.meta.env.VITE_API_URL}check_login.php`, {
+				withCredentials: true,
+			})
+			.then((res) => {
+				if (res.data === "sudah login") window.location.href = "/list";
+			});
+	}, []);
 
 	const handleChange = ({ currentTarget: input }) => {
 		const data = { ...state.data };
@@ -49,7 +60,11 @@ const Register = () => {
 
 	return (
 		<>
-			<div className="flex flex-col justify-center flex-1 min-h-full px-6 py-12 lg:px-8">
+			<motion.div
+				initial={{ scale: 0.2, opacity: 0 }}
+				animate={{ scale: 1, opacity: 1 }}
+				transition={{ duration: 1.05, type: "spring" }}
+				className="flex flex-col justify-center flex-1 min-h-full px-6 py-12 lg:px-8">
 				<div className="w-full max-w-sm mx-auto">
 					<img className="mx-auto w-44 h-max" src={Logo} alt="Waroeng Susea" />
 					<h2 className="mt-4 text-2xl font-bold leading-9 tracking-tight text-center text-green-900">
@@ -212,7 +227,7 @@ const Register = () => {
 						</a>
 					</p>
 				</div>
-			</div>
+			</motion.div>
 		</>
 	);
 };

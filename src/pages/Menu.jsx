@@ -4,6 +4,7 @@ import Navbar from "../components/Navbar";
 import CardMenu from "../components/CardMenu";
 import SkeletonCardMenu from "../components/SkeletonCardMenu";
 import { ShoppingCartIcon } from "@heroicons/react/24/outline";
+import { motion } from "framer-motion";
 
 const Menu = () => {
 	const [menuData, setMenuData] = useState();
@@ -148,6 +149,7 @@ const Menu = () => {
 											isLogin={isLogin}
 											tambahKeCart={tambahKeCart}
 											hapusDariCart={hapusDariCart}
+											index={index}
 										/>
 									</>
 							  ))}
@@ -155,14 +157,21 @@ const Menu = () => {
 
 					{cart.length > 0 && (
 						<div className="relative">
-							<button
+							<motion.button
+								initial={{ scale: 1 }}
+								whileHover={{ scale: 1.06 }}
+								whileTap={{ scale: 0.8 }}
 								className="fixed flex gap-4 p-4 text-white bg-green-900 rounded-full shadow-md shadow-green-900 md:rounded-md bottom-8 md:right-10 right-8"
 								onClick={toggleCart}>
 								<ShoppingCartIcon className="w-6" />
 								<h1 className="hidden md:block">Pesanan Kamu</h1>
-							</button>
+							</motion.button>
 							{isCartOpen && (
-								<div className="fixed flex flex-col items-center gap-6 p-8 bg-white rounded-md shadow-md md:gap-10 md:items-end md:flex-row bottom-24 right-8 md:right-10">
+								<motion.div
+									initial={{ translateX: 100, opacity: 0 }}
+									animate={{ translateX: 0, opacity: 1 }}
+									transition={{ duration: 1.05, type: "spring" }}
+									className="fixed flex flex-col items-center gap-6 p-8 bg-white rounded-md shadow-md md:gap-10 md:items-end md:flex-row bottom-24 right-8 md:right-10">
 									<div className="flex flex-col gap-4">
 										{cart?.map((item, index) => (
 											<div
@@ -196,13 +205,16 @@ const Menu = () => {
 												{formatToRupiah(hitungTotalHarga())}
 											</b>
 										</h1>
-										<button
+										<motion.button
+											initial={{ scale: 1 }}
+											whileHover={{ scale: 1.06 }}
+											whileTap={{ scale: 0.8 }}
 											className="p-2 text-white bg-green-900 md:p-3 rounded-xl"
 											onClick={tambahPesanan}>
 											Pesan
-										</button>
+										</motion.button>
 									</div>
-								</div>
+								</motion.div>
 							)}
 						</div>
 					)}
